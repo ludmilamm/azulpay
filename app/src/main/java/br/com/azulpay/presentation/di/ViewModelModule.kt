@@ -2,6 +2,8 @@ package br.com.azulpay.presentation.di
 
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.ViewModelProvider
+import br.com.azulpay.presentation.scene.contacts.ContactListViewModel
+import br.com.azulpay.presentation.scene.history.HistoryViewModel
 import br.com.azulpay.presentation.scene.home.HomeViewModel
 import dagger.Binds
 import dagger.Module
@@ -24,5 +26,15 @@ abstract class ViewModelModule {
     @Binds
     @IntoMap
     @ViewModelKey(HomeViewModel::class)
-    abstract fun bindRefundStepOneViewModel(viewModel: HomeViewModel): ViewModel
+    abstract fun bindHomeViewModel(viewModel: HomeViewModel): ViewModel
+
+    @Binds
+    @IntoMap
+    @ViewModelKey(ContactListViewModel::class)
+    abstract fun bindContactListViewModel(viewModel: ContactListViewModel): ViewModel
+
+    @Binds
+    @IntoMap
+    @ViewModelKey(HistoryViewModel::class)
+    abstract fun bindHistoryViewModel(viewModel: HistoryViewModel): ViewModel
 }

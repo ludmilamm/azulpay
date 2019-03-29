@@ -4,4 +4,6 @@
     <string name="cancel">Cancelar</string>
     <string name="unexpected_error">Ocorreu um erro inesperado. Tente novamente mais tarde</string>
     <string name="no_internet_error">Não foi possível conectar à internet. Verifique sua conexão e tente novamente.</string>
+    <string name="send_money">Enviar Dinheiro</string>
+    <string name="sent_history">Histórico de envios</string>
 </resources>

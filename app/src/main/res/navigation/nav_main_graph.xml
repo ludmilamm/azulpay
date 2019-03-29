@@ -8,6 +8,43 @@
     <fragment
             android:id="@+id/home_fragment"
             android:name="br.com.azulpay.presentation.scene.home.HomeFragment"
-            tools:layout="@layout/fragment_home" />
+            android:label=""
+            tools:layout="@layout/fragment_home">
+        <action
+                android:id="@+id/action_home_fragment_self"
+                app:destination="@id/home_fragment"
+                app:enterAnim="@anim/slide_in_up"
+                app:exitAnim="@anim/slide_out_down"/>
+        <action
+                android:id="@+id/action_home_fragment_to_contacts_fragment"
+                app:destination="@id/contacts_fragment"/>
+        <action
+                android:id="@+id/action_home_fragment_to_history_fragment"
+                app:destination="@id/history_fragment"/>
+    </fragment>
+
+    <fragment
+            android:id="@+id/contacts_fragment"
+            android:name="br.com.azulpay.presentation.scene.contacts.ContactListFragment"
+            android:label="@string/send_money"
+            tools:layout="@layout/fragment_home">
+        <action
+                android:id="@+id/action_contacts_fragment_self"
+                app:destination="@id/contacts_fragment"
+                app:enterAnim="@anim/slide_in_right"
+                app:exitAnim="@anim/slide_out_left"/>
+    </fragment>
+
+    <fragment
+            android:id="@+id/history_fragment"
+            android:name="br.com.azulpay.presentation.scene.history.HistoryFragment"
+            android:label="@string/sent_history"
+            tools:layout="@layout/fragment_home">
+        <action
+                android:id="@+id/action_history_fragment_self"
+                app:destination="@id/history_fragment"
+                app:enterAnim="@anim/slide_in_right"
+                app:exitAnim="@anim/slide_in_left"/>
+    </fragment>
 
 </navigation>

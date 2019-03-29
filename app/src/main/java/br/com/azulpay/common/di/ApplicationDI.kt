@@ -5,6 +5,8 @@ import android.util.Log
 import br.com.azulpay.data.remote.infrastructure.ErrorHandlingRxCallAdapterFactory
 import br.com.azulpay.domain.utility.Logger
 import br.com.azulpay.presentation.di.ViewModelModule
+import br.com.azulpay.presentation.scene.contacts.ContactListFragment
+import br.com.azulpay.presentation.scene.history.HistoryFragment
 import br.com.azulpay.presentation.scene.home.HomeFragment
 import dagger.Component
 import dagger.Module
@@ -66,4 +68,6 @@ interface ApplicationComponent {
     fun retrofit(): Retrofit
 
     fun inject(fragment: HomeFragment)
+    fun inject(fragment: ContactListFragment)
+    fun inject(fragment: HistoryFragment)
 }

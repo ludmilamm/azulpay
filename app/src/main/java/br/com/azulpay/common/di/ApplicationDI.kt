@@ -4,6 +4,8 @@ import android.content.Context
 import android.util.Log
 import br.com.azulpay.data.remote.infrastructure.ErrorHandlingRxCallAdapterFactory
 import br.com.azulpay.domain.utility.Logger
+import br.com.azulpay.presentation.di.ViewModelModule
+import br.com.azulpay.presentation.scene.home.HomeFragment
 import dagger.Component
 import dagger.Module
 import dagger.Provides
@@ -14,7 +16,7 @@ import retrofit2.Retrofit
 import retrofit2.converter.gson.GsonConverterFactory
 import javax.inject.Singleton
 
-@Module
+@Module(includes = [ViewModelModule::class])
 class ApplicationModule(private val context: Context) {
 
     @Provides
@@ -62,4 +64,6 @@ interface ApplicationComponent {
     fun logger(): Logger
 
     fun retrofit(): Retrofit
+
+    fun inject(fragment: HomeFragment)
 }

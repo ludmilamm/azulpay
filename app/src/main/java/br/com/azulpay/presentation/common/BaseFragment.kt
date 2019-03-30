@@ -10,6 +10,7 @@ import androidx.lifecycle.ViewModelProvider
 import br.com.azulpay.presentation.common.event.SingleEvent
 import br.com.azulpay.presentation.common.model.DialogDisplayModel
 import br.com.azulpay.presentation.common.model.ErrorDialogDisplayModel
+import kotlinx.android.synthetic.main.layout_loading.*
 
 abstract class BaseFragment : Fragment() {
 
@@ -33,7 +34,7 @@ abstract class BaseFragment : Fragment() {
         }
     }
 
-    fun showErrorDialog(error: ErrorDialogDisplayModel,
+    private fun showErrorDialog(error: ErrorDialogDisplayModel,
                         positiveAction: (dialog: DialogInterface, which: Int) -> Unit = { _, _ -> }) {
         showDialog(error, positiveAction)
     }
@@ -58,11 +59,11 @@ abstract class BaseFragment : Fragment() {
         }
     }
 
-    fun displayLoading() {
-        //loadingLayout?.visibility = View.VISIBLE
+    private fun displayLoading() {
+        loadingLayout?.visibility = View.VISIBLE
     }
 
-    fun dismissLoading() {
-        //loadingLayout?.visibility = View.GONE
+    private fun dismissLoading() {
+        loadingLayout?.visibility = View.GONE
     }
 }

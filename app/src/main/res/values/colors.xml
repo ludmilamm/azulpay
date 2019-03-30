@@ -1,6 +1,16 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
-    <color name="colorPrimary">#008577</color>
-    <color name="colorPrimaryDark">#00574B</color>
-    <color name="colorAccent">#D81B60</color>
+    <color name="colorPrimary">@color/mariner</color>
+    <color name="colorPrimaryDark">@color/jacksonsPurple</color>
+    <color name="colorPrimaryLight">@color/azureRadiance</color>
+    <color name="colorAccent">@color/supernova</color>
+
+    <color name="mariner">#2060cf</color>
+    <color name="jacksonsPurple">#272aa1</color>
+    <color name="azureRadiance">#009af3</color>
+    <color name="persianGreen">#00acaa</color>
+    <color name="eggBlue">#00dfD8</color>
+    <color name="whiteTransparent">#CCFFFFFF</color>
+    <color name="supernova">#ffc900</color>
+    <color name="tomato">#EE4242</color>
 </resources>

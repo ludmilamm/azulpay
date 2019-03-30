@@ -23,7 +23,6 @@ class MainActivity : AppCompatActivity() {
         navController = Navigation.findNavController(this, R.id.mainNavFragment)
         appBarConfiguration = AppBarConfiguration(navController.graph)
 
-        // Set up ActionBar
         setSupportActionBar(toolbar)
         setupActionBarWithNavController(navController, appBarConfiguration)
     }

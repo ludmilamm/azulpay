@@ -4,10 +4,13 @@ import android.content.Context
 import android.util.Log
 import br.com.azulpay.data.cache.datasource.UserCacheDataSource
 import br.com.azulpay.data.remote.datasource.LoginRemoteDataSource
+import br.com.azulpay.data.remote.datasource.TransactionRemoteDataSource
 import br.com.azulpay.data.remote.datasource.UserRemoteDataSource
 import br.com.azulpay.data.remote.infrastructure.ErrorHandlingRxCallAdapterFactory
 import br.com.azulpay.data.remote.infrastructure.GeneralInterceptor
+import br.com.azulpay.data.repository.TransactionRepository
 import br.com.azulpay.data.repository.UserRepository
+import br.com.azulpay.domain.datarepository.TransactionDataRepository
 import br.com.azulpay.domain.datarepository.UserDataRepository
 import br.com.azulpay.domain.utility.Logger
 import br.com.azulpay.presentation.di.ViewModelModule
@@ -86,17 +89,23 @@ class ApplicationModule(private val context: Context) {
 
     @Provides
     @Singleton
-    fun provideLoginRemoteDataSource(@AuthRetrofit retrofit: Retrofit) =
-            retrofit.create(LoginRemoteDataSource::class.java)
+    fun provideLoginRemoteDataSource(@AuthRetrofit retrofit: Retrofit) = retrofit.create(LoginRemoteDataSource::class.java)
 
     @Provides
     @Singleton
-    fun provideUserRemoteDataSource(@GeneralRetrofit retrofit: Retrofit) =
-            retrofit.create(UserRemoteDataSource::class.java)
+    fun provideUserRemoteDataSource(@GeneralRetrofit retrofit: Retrofit) = retrofit.create(UserRemoteDataSource::class.java)
+
+    @Provides
+    @Singleton
+    fun provideTransactionRemoteDataSource(@GeneralRetrofit retrofit: Retrofit) = retrofit.create(TransactionRemoteDataSource::class.java)
 
     @Provides
     @Singleton
     fun provideUserRepository(userRepository: UserRepository): UserDataRepository = userRepository
+
+    @Provides
+    @Singleton
+    fun provideTransactionRepository(transactionRepository: TransactionRepository): TransactionDataRepository = transactionRepository
 }
 
 @Singleton
@@ -118,7 +127,6 @@ interface ApplicationComponent {
 
     // fragments
     fun inject(fragment: HomeFragment)
-
     fun inject(fragment: ContactListFragment)
     fun inject(fragment: HistoryFragment)
 }

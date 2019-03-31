@@ -7,12 +7,14 @@ import androidx.appcompat.app.AlertDialog
 import androidx.fragment.app.Fragment
 import androidx.lifecycle.Observer
 import androidx.lifecycle.ViewModelProvider
+import br.com.azulpay.common.DisposableHolder
+import br.com.azulpay.common.DisposableHolderDelegate
 import br.com.azulpay.presentation.common.event.SingleEvent
 import br.com.azulpay.presentation.common.model.DialogDisplayModel
 import br.com.azulpay.presentation.common.model.ErrorDialogDisplayModel
 import kotlinx.android.synthetic.main.layout_loading.*
 
-abstract class BaseFragment : Fragment() {
+abstract class BaseFragment : Fragment(), DisposableHolder by DisposableHolderDelegate() {
 
     abstract val factory: ViewModelProvider.Factory
     abstract val viewModel: BaseViewModel
@@ -21,6 +23,11 @@ abstract class BaseFragment : Fragment() {
         super.onViewCreated(view, savedInstanceState)
 
         viewModel.getBaseEventsLiveData().observe(viewLifecycleOwner, Observer { e -> e?.let { handleBaseEvents(it) } })
+    }
+
+    override fun onDestroyView() {
+        disposeAll()
+        super.onDestroyView()
     }
 
     private fun handleBaseEvents(event: SingleEvent<*>) {

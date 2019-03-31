@@ -19,7 +19,7 @@ class UserRepository @Inject constructor(private val loginRemoteDataSource: Logi
 
     private fun login(): Single<UserCacheModel> {
         return loginRemoteDataSource.login(LoginRequestRemoteModel())
-                .flatMap { userRemoteDataSource.getUser(it.id).map { user -> user.response.toCacheModel(it.token, it.refreshToken) } }
+                .flatMap { userRemoteDataSource.getUser(it.id).map { user -> user.fields.toCacheModel(it.token, it.refreshToken) } }
                 .flatMap { userCacheDataSource.insertUser(it).toSingleDefault(it) }
     }
 
@@ -28,6 +28,6 @@ class UserRepository @Inject constructor(private val loginRemoteDataSource: Logi
     }
 
     override fun getUsers(): Single<List<User>> {
-        return userRemoteDataSource.getUsers().map { it.responseList.map { it.response.toDomainModel() } }
+        return userRemoteDataSource.getUsers().map { it.documents.map { it.fields.toDomainModel() } }
     }
 }

@@ -12,6 +12,7 @@
         android:id="@+id/imageViewClose"
         android:layout_width="24dp"
         android:layout_height="24dp"
+        android:background="?selectableItemBackground"
         android:src="@drawable/ic_close" />
 
     <ImageView
@@ -62,7 +63,9 @@
         android:layout_below="@id/textViewSendLabel"
         android:layout_marginTop="12dp"
         android:background="@drawable/shape_white_corner"
-        android:gravity="center_horizontal"
+        android:gravity="center"
+        android:inputType="number"
+        android:maxLength="13"
         android:textColor="@color/colorAccent"
         android:textSize="32sp" />
 

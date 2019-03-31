@@ -1,6 +1,7 @@
 package br.com.azulpay.presentation.scene.contacts
 
-data class ContactDisplayModel(val id: String,
-                               val name: String,
-                               val phone: String,
-                               val image: String)
+import br.com.azulpay.presentation.common.model.ContactDisplayModel
+import java.math.BigDecimal
+
+data class TransactionDisplayModel(val value: BigDecimal,
+                                   val contact: ContactDisplayModel)

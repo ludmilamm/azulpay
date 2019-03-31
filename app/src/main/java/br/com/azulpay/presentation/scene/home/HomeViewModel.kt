@@ -10,8 +10,8 @@ import javax.inject.Inject
 
 class HomeViewModel @Inject constructor(private val getAuthenticatedUser: GetAuthenticatedUser) : BaseViewModel() {
 
-    private val userLiveDataEvent = MutableLiveData<StateEvent<UserDisplayModel>>()
-    val userLiveData: LiveData<StateEvent<UserDisplayModel>> = userLiveDataEvent
+    private val userEvent = MutableLiveData<StateEvent<UserDisplayModel>>()
+    val userLiveData: LiveData<StateEvent<UserDisplayModel>> = userEvent
 
     init {
         getUser()
@@ -23,7 +23,7 @@ class HomeViewModel @Inject constructor(private val getAuthenticatedUser: GetAut
                 .map { it.toDisplayModel() }
                 .doFinally { baseEventsLiveData.postDismissLoading() }
                 .subscribe({
-                    userLiveDataEvent.postSuccess(it)
+                    userEvent.postSuccess(it)
                 }, {
                     baseEventsLiveData.postError(mapErrorToDisplayModel(it))
                 }).addTo(disposables)

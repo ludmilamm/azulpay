@@ -4,6 +4,8 @@ import android.content.Context
 import android.widget.ImageView
 import com.bumptech.glide.request.RequestOptions
 
+const val PHONE_MASK = "(##) #####-####"
+
 fun ImageView.setCircleImage(context: Context, imageUrl: String) {
     GlideApp.with(context)
             .asBitmap()

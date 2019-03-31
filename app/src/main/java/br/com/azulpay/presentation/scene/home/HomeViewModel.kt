@@ -1,8 +1,32 @@
 package br.com.azulpay.presentation.scene.home
 
+import androidx.lifecycle.LiveData
+import androidx.lifecycle.MutableLiveData
+import br.com.azulpay.domain.usecase.GetAuthenticatedUser
 import br.com.azulpay.presentation.common.BaseViewModel
+import br.com.azulpay.presentation.common.event.*
+import com.hadilq.liveevent.LiveEvent
+import io.reactivex.rxkotlin.addTo
 import javax.inject.Inject
 
-class HomeViewModel @Inject constructor() : BaseViewModel() {
-    // TODO: Implement the ViewModel
+class HomeViewModel @Inject constructor(private val getAuthenticatedUser: GetAuthenticatedUser) : BaseViewModel() {
+
+    private val userLiveDataEvent = MutableLiveData<StateEvent<UserDisplayModel>>()
+    val userLiveData: LiveData<StateEvent<UserDisplayModel>> = userLiveDataEvent
+
+    init {
+        getUser()
+    }
+
+    private fun getUser() {
+        baseEventsLiveData.postLoading()
+        getAuthenticatedUser.getSingle(Unit)
+                .map { it.toDisplayModel() }
+                .doFinally { baseEventsLiveData.postDismissLoading() }
+                .subscribe({
+                    userLiveDataEvent.postSuccess(it)
+                }, {
+                    baseEventsLiveData.postError(mapError(it))
+                }).addTo(disposables)
+    }
 }

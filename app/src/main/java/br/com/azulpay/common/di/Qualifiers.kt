@@ -10,3 +10,9 @@ annotation class BackgroundScheduler
 
 @Qualifier
 annotation class ApplicationContext
+
+@Qualifier
+annotation class GeneralRetrofit
+
+@Qualifier
+annotation class AuthRetrofit

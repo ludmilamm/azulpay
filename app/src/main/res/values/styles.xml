@@ -38,7 +38,7 @@
 
     <style name="ImageViewRoundBordered">
         <item name="android:background">@drawable/shape_blue_circle</item>
-        <item name="android:padding">10dp</item>
+        <item name="android:padding">3dp</item>
     </style>
 
 </resources>

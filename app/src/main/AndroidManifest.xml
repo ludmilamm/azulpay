@@ -3,6 +3,8 @@
           xmlns:tools="http://schemas.android.com/tools"
           package="br.com.azulpay">
 
+    <uses-permission android:name="android.permission.INTERNET" />
+
     <application
             android:name=".common.Application"
             android:allowBackup="true"

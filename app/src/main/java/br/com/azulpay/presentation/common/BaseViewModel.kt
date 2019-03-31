@@ -4,7 +4,9 @@ import androidx.lifecycle.LiveData
 import androidx.lifecycle.ViewModel
 import br.com.azulpay.common.DisposableHolder
 import br.com.azulpay.common.DisposableHolderDelegate
+import br.com.azulpay.common.NoInternetException
 import br.com.azulpay.presentation.common.event.SingleEvent
+import br.com.azulpay.presentation.common.model.ErrorDialogDisplayModel
 import com.hadilq.liveevent.LiveEvent
 
 open class BaseViewModel : ViewModel(), DisposableHolder by DisposableHolderDelegate() {
@@ -17,5 +19,12 @@ open class BaseViewModel : ViewModel(), DisposableHolder by DisposableHolderDele
     override fun onCleared() {
         super.onCleared()
         disposeAll()
+    }
+
+    fun mapError(error: Throwable): ErrorDialogDisplayModel {
+        return when(error) {
+            is NoInternetException -> ErrorDialogDisplayModel.Internet
+            else -> ErrorDialogDisplayModel.Unexpected
+        }
     }
 }

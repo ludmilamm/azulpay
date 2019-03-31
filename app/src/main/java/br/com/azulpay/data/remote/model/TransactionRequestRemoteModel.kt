@@ -11,5 +11,6 @@ data class TransactionRequestRemoteModel(@SerializedName("fields") val fields: T
 
     data class User(@SerializedName("id") val id: StringRemoteModel,
                     @SerializedName("name") val name: StringRemoteModel,
-                    @SerializedName("phone") val phone: StringRemoteModel)
+                    @SerializedName("phone") val phone: StringRemoteModel,
+                    @SerializedName("image") val image: StringRemoteModel)
 }

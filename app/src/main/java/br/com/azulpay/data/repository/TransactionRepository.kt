@@ -13,7 +13,7 @@ class TransactionRepository @Inject constructor(private val transactionRemoteDat
 
     override fun postTransaction(transactionRequest: TransactionRequest): Completable {
         return userCacheDataSource.getUser().flatMapCompletable {
-            transactionRemoteDataSource.postTransaction(transactionRequest.toRemoteModel(it.id, it.name, it.phone)).ignoreElement()
+            transactionRemoteDataSource.postTransaction(transactionRequest.toRemoteModel(it.id, it.name, it.phone, it.image)).ignoreElement()
         }
     }
 }

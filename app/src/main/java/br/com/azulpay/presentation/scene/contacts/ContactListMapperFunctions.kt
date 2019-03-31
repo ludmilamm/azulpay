@@ -6,4 +6,4 @@ import br.com.azulpay.presentation.common.model.ContactDisplayModel
 
 fun User.toDisplayModel() = ContactDisplayModel(id, name, phone, image)
 
-fun TransactionDisplayModel.toDomainModel() = TransactionRequest(value, contact.id, contact.name, contact.phone)
+fun TransactionDisplayModel.toDomainModel() = TransactionRequest(value, contact.id, contact.name, contact.phone, contact.image)

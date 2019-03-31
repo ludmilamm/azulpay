@@ -7,9 +7,9 @@ import br.com.azulpay.data.remote.datasource.LoginRemoteDataSource
 import br.com.azulpay.data.remote.datasource.UserRemoteDataSource
 import br.com.azulpay.data.remote.model.LoginRequestRemoteModel
 import br.com.azulpay.data.remote.toCacheModel
+import br.com.azulpay.data.remote.toDomainModel
 import br.com.azulpay.domain.datarepository.UserDataRepository
 import br.com.azulpay.domain.model.User
-import io.reactivex.Completable
 import io.reactivex.Single
 import javax.inject.Inject
 
@@ -25,5 +25,9 @@ class UserRepository @Inject constructor(private val loginRemoteDataSource: Logi
 
     override fun getAuthenticatedUser(): Single<User> {
         return userCacheDataSource.getUser().onErrorResumeNext { login() }.map { it.toDomainModel() }
+    }
+
+    override fun getUsers(): Single<List<User>> {
+        return userRemoteDataSource.getUsers().map { it.responseList.map { it.response.toDomainModel() } }
     }
 }

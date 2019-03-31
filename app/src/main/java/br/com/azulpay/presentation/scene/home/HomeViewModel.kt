@@ -5,7 +5,6 @@ import androidx.lifecycle.MutableLiveData
 import br.com.azulpay.domain.usecase.GetAuthenticatedUser
 import br.com.azulpay.presentation.common.BaseViewModel
 import br.com.azulpay.presentation.common.event.*
-import com.hadilq.liveevent.LiveEvent
 import io.reactivex.rxkotlin.addTo
 import javax.inject.Inject
 
@@ -26,7 +25,7 @@ class HomeViewModel @Inject constructor(private val getAuthenticatedUser: GetAut
                 .subscribe({
                     userLiveDataEvent.postSuccess(it)
                 }, {
-                    baseEventsLiveData.postError(mapError(it))
+                    baseEventsLiveData.postError(mapErrorToDisplayModel(it))
                 }).addTo(disposables)
     }
 }

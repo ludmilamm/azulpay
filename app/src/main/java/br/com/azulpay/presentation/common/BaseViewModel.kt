@@ -21,7 +21,7 @@ open class BaseViewModel : ViewModel(), DisposableHolder by DisposableHolderDele
         disposeAll()
     }
 
-    fun mapError(error: Throwable): ErrorDialogDisplayModel {
+    fun mapErrorToDisplayModel(error: Throwable): ErrorDialogDisplayModel {
         return when(error) {
             is NoInternetException -> ErrorDialogDisplayModel.Internet
             else -> ErrorDialogDisplayModel.Unexpected

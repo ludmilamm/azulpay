@@ -5,4 +5,5 @@ import io.reactivex.Single
 
 interface UserDataRepository {
     fun getAuthenticatedUser(): Single<User>
+    fun getUsers(): Single<List<User>>
 }

@@ -10,10 +10,11 @@
     <View
         android:layout_width="match_parent"
         android:layout_height=".5dp"
-        android:background="@color/colorAccent" />
+        android:background="@color/persianGreen" />
 
     <ImageView
         android:id="@+id/imageViewContact"
+        style="@style/ImageViewRoundBordered"
         android:layout_width="50dp"
         android:layout_height="50dp"
         android:layout_centerVertical="true"
@@ -33,7 +34,7 @@
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:fontFamily="@font/semi_bold"
-            android:textColor="@color/colorAccent"
+            android:textColor="@color/persianGreen"
             android:textSize="16sp"
             tools:text="Dayneris Targerian" />
 
@@ -42,7 +43,7 @@
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:fontFamily="@font/light"
-            android:textColor="@color/colorAccent"
+            android:textColor="@color/persianGreen"
             android:textSize="14sp"
             tools:text="(11)9898349893" />
 
@@ -51,7 +52,7 @@
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:fontFamily="@font/light"
-            android:textColor="@color/colorAccent"
+            android:textColor="@color/persianGreen"
             android:textSize="12sp"
             tools:text="R$ 67,89" />
 

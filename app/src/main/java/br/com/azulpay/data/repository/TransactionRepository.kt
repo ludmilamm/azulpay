@@ -1,5 +1,6 @@
 package br.com.azulpay.data.repository
 
+import br.com.azulpay.common.parseToDateMillis
 import br.com.azulpay.data.cache.datasource.UserCacheDataSource
 import br.com.azulpay.data.remote.datasource.TransactionRemoteDataSource
 import br.com.azulpay.data.remote.toDomainModel
@@ -21,5 +22,5 @@ class TransactionRepository @Inject constructor(private val transactionRemoteDat
     }
 
     override fun getTransactions(): Single<List<Transaction>> = transactionRemoteDataSource.getTransactions()
-            .map { it.documents.map { it.fields.toDomainModel() } }
+            .map { it.documents.map { it.fields.toDomainModel(it.date.parseToDateMillis() ?: 0) } }
 }

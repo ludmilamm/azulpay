@@ -94,7 +94,7 @@ class HistoryFragment : BaseFragment() {
 
     private fun handleTransactions(event: StateEvent<List<TransactionDisplayModel>>) {
         if (event is StateEvent.Success) {
-            adapter.setData(event.data)
+            adapter.setData(event.data.sortedBy { it.date })
             setupChartData(event.data)
         }
     }
@@ -104,6 +104,7 @@ class HistoryFragment : BaseFragment() {
         val groupedTransactions = transactions.groupBy { it.toUserId }
         val barEntriesToContact = groupedTransactions
                 .map { it.key to it.value.map { it.value }.reduce { acc, decimal -> acc + decimal } }
+                .sortedByDescending { it.second }
                 .mapIndexed { index, it -> it.first to BarEntry(index.toFloat(), it.second.toFloat()) }
 
         // set values data

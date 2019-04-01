@@ -9,6 +9,7 @@ import android.os.Bundle
 import android.view.View
 import android.view.Window
 import br.com.azulpay.R
+import br.com.azulpay.common.getLocale
 import br.com.azulpay.presentation.common.PHONE_MASK
 import br.com.azulpay.presentation.common.model.ContactDisplayModel
 import br.com.azulpay.presentation.common.setCircleImage
@@ -51,7 +52,7 @@ class SendMoneyDialogCustom(context: Context) : Dialog(context) {
         imageViewProfile.setCircleImage(context, contactDisplayModel.image)
         textViewName.text = contactDisplayModel.name
         textViewPhone.text = contactDisplayModel.phone.setMask(PHONE_MASK)
-        editTextValue.addCurrencyMask(Locale("pt", "BR"))
+        editTextValue.addCurrencyMask(getLocale())
         buttonSend.clicks().subscribe {
                     sendMoneySubject.onNext(removeCurrencyMask(editTextValue.text.toString()) ?: BigDecimal.ZERO)
                 }

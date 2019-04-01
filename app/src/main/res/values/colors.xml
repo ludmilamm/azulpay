@@ -9,6 +9,7 @@
     <color name="mariner">#2060cf</color>
     <color name="jacksonsPurple">#272aa1</color>
     <color name="azureRadiance">#009af3</color>
+    <color name="azureRadianceAlpha">#40009AF3</color>
     <color name="persianGreen">#00acaa</color>
     <color name="eggBlue">#00dfD8</color>
     <color name="whiteTransparent">#CCFFFFFF</color>

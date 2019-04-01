@@ -36,7 +36,7 @@
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:fontFamily="@font/semi_bold"
-            android:textColor="@color/persianGreen"
+            android:textColor="@color/eggBlue"
             android:textSize="16sp"
             tools:text="Dayneris Targerian" />
 
@@ -45,7 +45,7 @@
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:fontFamily="@font/light"
-            android:textColor="@color/persianGreen"
+            android:textColor="@color/white"
             android:textSize="14sp"
             tools:text="(11)9898349893" />
 
@@ -54,7 +54,7 @@
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:fontFamily="@font/light"
-            android:textColor="@color/persianGreen"
+            android:textColor="@color/white"
             android:textSize="12sp"
             android:visibility="gone"
             tools:text="R$ 67,89" />

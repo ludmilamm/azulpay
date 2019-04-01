@@ -20,7 +20,7 @@
 
     <style name="Button" parent="Base.Widget.AppCompat.Button.Borderless">
         <item name="android:fontFamily">@font/semi_bold</item>
-        <item name="android:textColor">@android:color/white</item>
+        <item name="android:textColor">@color/white</item>
         <item name="colorButtonNormal">@color/persianGreen</item>
         <item name="android:colorButtonNormal">@color/persianGreen</item>
     </style>

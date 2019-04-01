@@ -30,7 +30,7 @@
         android:layout_centerHorizontal="true"
         android:layout_marginTop="12dp"
         android:fontFamily="@font/semi_bold"
-        android:textColor="@android:color/white"
+        android:textColor="@color/white"
         android:textSize="16sp"
         tools:text="Joana Maria" />
 
@@ -40,7 +40,7 @@
         android:layout_height="wrap_content"
         android:layout_below="@id/textViewName"
         android:layout_centerHorizontal="true"
-        android:textColor="@android:color/white"
+        android:textColor="@color/white"
         android:textSize="14sp"
         tools:text="1923948392883" />
 
@@ -53,7 +53,7 @@
         android:layout_marginTop="20dp"
         android:fontFamily="@font/light"
         android:text="@string/value_to_send"
-        android:textColor="@android:color/white"
+        android:textColor="@color/white"
         android:textSize="14sp" />
 
     <EditText

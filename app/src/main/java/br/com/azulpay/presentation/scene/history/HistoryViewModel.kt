@@ -25,7 +25,7 @@ class HistoryViewModel @Inject constructor(private val getSentTransactions: GetS
                 .subscribe({
                     transactionsEvent.postSuccess(it)
                 }, {
-                    transactionsEvent.postError(mapErrorToDisplayModel(it))
+                    transactionsEvent.postErrorDialog(mapErrorToDisplayModel(it))
                 }).addTo(disposables)
     }
 }

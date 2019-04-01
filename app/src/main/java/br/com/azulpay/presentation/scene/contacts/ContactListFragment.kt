@@ -79,9 +79,15 @@ class ContactListFragment : BaseFragment() {
     }
 
     private fun handleTransaction(event: SingleEvent<Unit>) {
-        if (event is SingleEvent.Success) {
-            sendMoneyDialogCustom.dismiss()
-            Toast.makeText(context, R.string.transaction_success, Toast.LENGTH_SHORT).show()
+        when (event) {
+            is SingleEvent.Loading -> sendMoneyDialogCustom.startSendingMode()
+            is SingleEvent.Success -> {
+                sendMoneyDialogCustom.dismiss()
+                Toast.makeText(context, R.string.transaction_success, Toast.LENGTH_SHORT).show()
+            }
+            is SingleEvent.Error -> {
+                event.error?.let { sendMoneyDialogCustom.showErrorMessage(getString(it.message)) }
+            }
         }
     }
 }

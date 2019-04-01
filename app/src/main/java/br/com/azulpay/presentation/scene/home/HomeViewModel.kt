@@ -25,7 +25,7 @@ class HomeViewModel @Inject constructor(private val getAuthenticatedUser: GetAut
                 .subscribe({
                     userEvent.postSuccess(it)
                 }, {
-                    baseEventsLiveData.postError(mapErrorToDisplayModel(it))
+                    baseEventsLiveData.postErrorDialog(mapErrorToDisplayModel(it))
                 }).addTo(disposables)
     }
 }

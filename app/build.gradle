@@ -64,7 +64,7 @@ dependencies {
     implementation "com.google.android.material:material:1.0.0"
     implementation "com.github.hadilq.liveevent:liveevent:1.0.1"
     implementation 'com.github.PhilJay:MPAndroidChart:v3.1.0'
-    implementation 'com.github.tokenlab:EditTextMasked:1.1.1' // LIB CREATED BY ME https://github.com/tokenlab/EditTextMasked
+    implementation 'com.github.tokenlab:EditTextMasked:1.1.02-alpha' // LIB CREATED BY ME https://github.com/tokenlab/EditTextMasked
     implementation 'com.github.pakoito:RxPaper2:1.4.0'
     implementation 'com.google.code.findbugs:jsr305:3.0.2'
 }

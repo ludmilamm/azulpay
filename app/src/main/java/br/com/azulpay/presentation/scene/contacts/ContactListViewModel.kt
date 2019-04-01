@@ -2,8 +2,10 @@ package br.com.azulpay.presentation.scene.contacts
 
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
+import br.com.azulpay.common.EmptyFieldException
 import br.com.azulpay.domain.usecase.GetContacts
 import br.com.azulpay.domain.usecase.PostTransaction
+import br.com.azulpay.domain.usecase.ValidateValueToSend
 import br.com.azulpay.presentation.common.BaseViewModel
 import br.com.azulpay.presentation.common.event.*
 import br.com.azulpay.presentation.common.model.ContactDisplayModel
@@ -12,7 +14,8 @@ import io.reactivex.rxkotlin.addTo
 import javax.inject.Inject
 
 class ContactListViewModel @Inject constructor(private val getContacts: GetContacts,
-                                               private val postTransaction: PostTransaction) : BaseViewModel() {
+                                               private val postTransaction: PostTransaction,
+                                               private val validateValueToSend: ValidateValueToSend) : BaseViewModel() {
 
     private val contactEvent = MutableLiveData<StateEvent<List<ContactDisplayModel>>>()
     val contactsLiveData: LiveData<StateEvent<List<ContactDisplayModel>>> = contactEvent
@@ -32,18 +35,26 @@ class ContactListViewModel @Inject constructor(private val getContacts: GetConta
                 .subscribe({
                     contactEvent.postSuccess(it)
                 }, {
-                    contactEvent.postError(mapErrorToDisplayModel(it))
+                    contactEvent.postErrorDialog(mapErrorToDisplayModel(it))
                 }).addTo(disposables)
     }
 
     fun postTransaction(transactionDisplayModel: TransactionDisplayModel) {
         baseEventsLiveData.postLoading()
-        postTransaction.getCompletable(transactionDisplayModel.toDomainModel())
+        validateValueToSend.getCompletable(transactionDisplayModel.value)
+                .doOnComplete { transactionEvent.value = SingleEvent.Loading() }
+                .doOnError {
+                    transactionEvent.postError(when (it) {
+                        is EmptyFieldException -> EmptyValueErrorDisplayModel()
+                        else -> InvalidValueErrorDisplayModel()
+                    })
+                }.andThen(postTransaction.getCompletable(transactionDisplayModel.toDomainModel())
+                        .doOnComplete { transactionEvent.postSuccess(Unit) }
+                        .doOnError { baseEventsLiveData.postErrorDialog(mapErrorToDisplayModel(it)) })
+                .onErrorComplete()
                 .doFinally { baseEventsLiveData.postDismissLoading() }
-                .subscribe({
-                    transactionEvent.postSuccess(Unit)
-                },{
-                    baseEventsLiveData.postError(mapErrorToDisplayModel(it))
-                }).addTo(disposables)
+                .subscribe({}, {}).addTo(disposables)
     }
+
+
 }

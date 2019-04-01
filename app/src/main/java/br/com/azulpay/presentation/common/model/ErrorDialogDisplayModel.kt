@@ -2,6 +2,8 @@ package br.com.azulpay.presentation.common.model
 
 import br.com.azulpay.R
 
+open class ErrorDisplayModel(val message: Int)
+
 open class ErrorDialogDisplayModel(
     message: Int,
     title: Int? = null,

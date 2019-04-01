@@ -8,5 +8,8 @@
     <string name="sent_history">Histórico de envios</string>
     <string name="value_to_send">Valor a enviar:</string>
     <string name="to_send">Enviar</string>
+    <string name="sending">Enviando…</string>
     <string name="transaction_success">Transação realizada com sucesso!</string>
+    <string name="empty_value">Por favor, insira um valor.</string>
+    <string name="invalid_value">Por favor, insira um valor válido.</string>
 </resources>

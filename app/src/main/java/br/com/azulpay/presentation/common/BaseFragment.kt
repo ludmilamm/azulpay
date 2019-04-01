@@ -35,7 +35,7 @@ abstract class BaseFragment : Fragment(), DisposableHolder by DisposableHolderDe
             dismissLoading()
 
         when (event) {
-            is SingleEvent.Error -> event.error?.let { showErrorDialog(it) }
+            is SingleEvent.ErrorDialog -> event.error?.let { showErrorDialog(it) }
             is SingleEvent.Loading -> displayLoading()
             is SingleEvent.DismissLoading -> dismissLoading()
         }

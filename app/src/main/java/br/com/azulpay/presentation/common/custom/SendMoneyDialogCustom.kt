@@ -6,6 +6,7 @@ import android.content.Context
 import android.graphics.Color
 import android.graphics.drawable.ColorDrawable
 import android.os.Bundle
+import android.text.SpannableStringBuilder
 import android.view.View
 import android.view.Window
 import br.com.azulpay.R
@@ -14,6 +15,7 @@ import br.com.azulpay.presentation.common.PHONE_MASK
 import br.com.azulpay.presentation.common.model.ContactDisplayModel
 import br.com.azulpay.presentation.common.setCircleImage
 import br.com.tokenlab.edittextmasked.addCurrencyMask
+import br.com.tokenlab.edittextmasked.removeCurrencyMask
 import br.com.tokenlab.edittextmasked.setMask
 import com.jakewharton.rxbinding3.view.clicks
 import com.jakewharton.rxbinding3.widget.textChanges
@@ -47,25 +49,27 @@ class SendMoneyDialogCustom(context: Context) : Dialog(context) {
         textViewError.text = message
     }
 
+    fun startSendingMode() {
+        setCancelable(false)
+        editTextValue.isEnabled = false
+        textViewError.visibility = View.INVISIBLE
+        buttonSend.text = context.getString(R.string.sending)
+    }
+
     private fun setupView() {
+        setCancelable(true)
         imageViewClose.clicks().subscribe { dismiss() }
         imageViewProfile.setCircleImage(context, contactDisplayModel.image)
         textViewName.text = contactDisplayModel.name
         textViewPhone.text = contactDisplayModel.phone.setMask(PHONE_MASK)
+        editTextValue.isEnabled = true
+        editTextValue.text = SpannableStringBuilder("R$ 0,00")
+        editTextValue.setSelection(editTextValue.text.length)
         editTextValue.addCurrencyMask(getLocale())
+        textViewError.visibility = View.INVISIBLE
+        buttonSend.text = context.getString(R.string.to_send)
         buttonSend.clicks().subscribe {
-                    sendMoneySubject.onNext(removeCurrencyMask(editTextValue.text.toString()) ?: BigDecimal.ZERO)
-                }
-    }
-
-    private fun removeCurrencyMask(valueString: String): BigDecimal? {
-        return try {
-            val value = valueString.replace("[^0-9,]".toRegex(), "").replace(",", ".").toBigDecimal()
-            if (value < BigDecimal.valueOf(0.01))
-                BigDecimal.ZERO
-            else value
-        } catch (e: Exception) {
-            null
+            sendMoneySubject.onNext(editTextValue.text.toString().removeCurrencyMask() ?: BigDecimal.ZERO)
         }
     }
 }

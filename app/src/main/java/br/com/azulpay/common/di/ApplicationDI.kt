@@ -7,7 +7,7 @@ import br.com.azulpay.data.remote.datasource.LoginRemoteDataSource
 import br.com.azulpay.data.remote.datasource.TransactionRemoteDataSource
 import br.com.azulpay.data.remote.datasource.UserRemoteDataSource
 import br.com.azulpay.data.remote.infrastructure.ErrorHandlingRxCallAdapterFactory
-import br.com.azulpay.data.remote.infrastructure.GeneralInterceptor
+import br.com.azulpay.data.remote.infrastructure.TokenAuthenticator
 import br.com.azulpay.data.repository.TransactionRepository
 import br.com.azulpay.data.repository.UserRepository
 import br.com.azulpay.domain.datarepository.TransactionDataRepository
@@ -64,8 +64,10 @@ class ApplicationModule(private val context: Context) {
     @Provides
     @Singleton
     @GeneralRetrofit
-    fun provideOkHttpClient(generalInterceptor: GeneralInterceptor, okHttpClientBuilder: OkHttpClient.Builder): OkHttpClient =
-            okHttpClientBuilder.addInterceptor(generalInterceptor).build()
+    fun provideOkHttpClient(okHttpClientBuilder: OkHttpClient.Builder, tokenAuthenticator: TokenAuthenticator): OkHttpClient =
+            okHttpClientBuilder
+                    .authenticator(tokenAuthenticator)
+                    .build()
 
     @Provides
     @Singleton
@@ -84,7 +86,7 @@ class ApplicationModule(private val context: Context) {
             .addCallAdapterFactory(ErrorHandlingRxCallAdapterFactory())
             .addConverterFactory(GsonConverterFactory.create())
             .client(okHttpClientBuilder.build())
-            .baseUrl("https://www.googleapis.com/identitytoolkit/v3/relyingparty/")
+            .baseUrl("http://willbereplaced.com")
             .build()
 
     @Provides

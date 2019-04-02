@@ -35,13 +35,18 @@ abstract class BaseFragment : Fragment(), DisposableHolder by DisposableHolderDe
             dismissLoading()
 
         when (event) {
-            is SingleEvent.ErrorDialog -> event.error?.let { showErrorDialog(it) }
+            is SingleEvent.ErrorDialog -> event.error?.let {
+                showErrorDialog(it) { _, _ ->
+                    if (it.isBlocking)
+                        activity?.onBackPressed()
+                }
+            }
             is SingleEvent.Loading -> displayLoading()
             is SingleEvent.DismissLoading -> dismissLoading()
         }
     }
 
-    private fun showErrorDialog(error: ErrorDialogDisplayModel,
+    fun showErrorDialog(error: ErrorDialogDisplayModel,
                         positiveAction: (dialog: DialogInterface, which: Int) -> Unit = { _, _ -> }) {
         showDialog(error, positiveAction)
     }
@@ -53,8 +58,8 @@ abstract class BaseFragment : Fragment(), DisposableHolder by DisposableHolderDe
         context?.let {
             with(dialogDisplayModel) {
                 val builder = AlertDialog.Builder(it)
-                    .setMessage(message)
-                    .setCancelable(cancelable)
+                        .setMessage(message)
+                        .setCancelable(cancelable)
 
 
                 negativeLabel?.let { negativeLabel -> builder.setNegativeButton(negativeLabel, negativeAction) }

@@ -53,6 +53,7 @@ class SendMoneyDialogCustom(context: Context) : Dialog(context) {
         setCancelable(false)
         editTextValue.isEnabled = false
         textViewError.visibility = View.INVISIBLE
+        buttonSend.isEnabled = false
         buttonSend.text = context.getString(R.string.sending)
     }
 
@@ -67,6 +68,7 @@ class SendMoneyDialogCustom(context: Context) : Dialog(context) {
         editTextValue.setSelection(editTextValue.text.length)
         editTextValue.addCurrencyMask(getLocale())
         textViewError.visibility = View.INVISIBLE
+        buttonSend.isEnabled = true
         buttonSend.text = context.getString(R.string.to_send)
         buttonSend.clicks().subscribe {
             sendMoneySubject.onNext(editTextValue.text.toString().removeCurrencyMask() ?: BigDecimal.ZERO)

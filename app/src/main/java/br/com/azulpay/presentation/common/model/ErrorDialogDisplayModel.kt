@@ -9,7 +9,8 @@ open class ErrorDialogDisplayModel(
     title: Int? = null,
     positiveLabel: Int? = R.string.ok,
     negativeLabel: Int? = null,
-    cancelable: Boolean = true
+    cancelable: Boolean = true,
+    var isBlocking: Boolean = false
 ) : DialogDisplayModel(message, title, positiveLabel, negativeLabel, cancelable) {
 
     object Unexpected : ErrorDialogDisplayModel(R.string.unexpected_error)

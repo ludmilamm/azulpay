@@ -10,8 +10,14 @@ open class StateEvent<out T> {
     data class ErrorDialog<out T>(val error: ErrorDialogDisplayModel?) : StateEvent<T>()
 }
 
-fun <T> MutableLiveData<StateEvent<T>>.postSuccess(value: T) = postValue(StateEvent.Success(value))
+fun <T> MutableLiveData<StateEvent<T>>.postSuccess(value: T) {
+    this.value = StateEvent.Success(value)
+}
 
-fun <T> MutableLiveData<StateEvent<T>>.postErrorDialog(error: ErrorDialogDisplayModel) = postValue(StateEvent.ErrorDialog(error))
+fun <T> MutableLiveData<StateEvent<T>>.postErrorDialog(error: ErrorDialogDisplayModel) {
+    value = StateEvent.ErrorDialog(error)
+}
 
-fun <T> MutableLiveData<StateEvent<T>>.postError(error: ErrorDisplayModel) = postValue(StateEvent.Error(error))
+fun <T> MutableLiveData<StateEvent<T>>.postError(error: ErrorDisplayModel) {
+    value = StateEvent.Error(error)
+}

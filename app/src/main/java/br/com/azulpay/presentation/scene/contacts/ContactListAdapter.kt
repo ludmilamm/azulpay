@@ -30,15 +30,16 @@ class ContactListAdapter : RecyclerView.Adapter<ContactListAdapter.ContactViewHo
     }
 
     override fun onBindViewHolder(holder: ContactViewHolder, position: Int) {
-        holder.bind(contacts[position])
+        holder.bind(contacts[position], position != 0)
     }
 
     override fun getItemCount(): Int = contacts.size
 
     inner class ContactViewHolder(private val rootView: View) : RecyclerView.ViewHolder(rootView) {
 
-        fun bind(contact: ContactDisplayModel) {
+        fun bind(contact: ContactDisplayModel, showSeparator: Boolean) {
             with(rootView) {
+                separator.visibility = if (showSeparator) View.VISIBLE else View.INVISIBLE
                 imageViewContact.setCircleImage(context, contact.image)
                 textViewName.text = contact.name
                 textViewPhone.text = contact.phone.setMask(PHONE_MASK)

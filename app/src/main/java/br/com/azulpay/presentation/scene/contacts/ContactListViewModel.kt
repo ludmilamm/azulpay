@@ -35,7 +35,7 @@ class ContactListViewModel @Inject constructor(private val getContacts: GetConta
                 .subscribe({
                     contactEvent.postSuccess(it)
                 }, {
-                    contactEvent.postErrorDialog(mapErrorToDisplayModel(it))
+                    baseEventsLiveData.postErrorDialog(mapErrorDialogDisplayModel(it).apply { isBlocking = true })
                 }).addTo(disposables)
     }
 
@@ -50,7 +50,7 @@ class ContactListViewModel @Inject constructor(private val getContacts: GetConta
                     })
                 }.andThen(postTransaction.getCompletable(transactionDisplayModel.toDomainModel())
                         .doOnComplete { transactionEvent.postSuccess(Unit) }
-                        .doOnError { baseEventsLiveData.postErrorDialog(mapErrorToDisplayModel(it)) })
+                        .doOnError { baseEventsLiveData.postErrorDialog(mapErrorDialogDisplayModel(it)) })
                 .onErrorComplete()
                 .doFinally { baseEventsLiveData.postDismissLoading() }
                 .subscribe({}, {}).addTo(disposables)

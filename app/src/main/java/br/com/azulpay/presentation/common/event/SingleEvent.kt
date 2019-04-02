@@ -12,11 +12,17 @@ open class SingleEvent<out T> {
     class DismissLoading<out T> : SingleEvent<T>()
 }
 
-fun <T> LiveEvent<SingleEvent<T>>.postSuccess(value: T) = postValue(SingleEvent.Success(value))
+fun <T> LiveEvent<SingleEvent<T>>.postSuccess(value: T) {
+    this.value = SingleEvent.Success(value)
+}
 
-fun <T> LiveEvent<SingleEvent<T>>.postError(error: ErrorDisplayModel) = postValue(SingleEvent.Error(error))
+fun <T> LiveEvent<SingleEvent<T>>.postError(error: ErrorDisplayModel) {
+    value = SingleEvent.Error(error)
+}
 
-fun <T> LiveEvent<SingleEvent<T>>.postErrorDialog(error: ErrorDialogDisplayModel) = postValue(SingleEvent.ErrorDialog(error))
+fun <T> LiveEvent<SingleEvent<T>>.postErrorDialog(error: ErrorDialogDisplayModel) {
+    value = SingleEvent.ErrorDialog(error)
+}
 
 fun <T> LiveEvent<SingleEvent<T>>.postLoading() = postValue(SingleEvent.Loading())
 

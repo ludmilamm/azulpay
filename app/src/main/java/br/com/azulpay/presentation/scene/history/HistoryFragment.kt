@@ -105,6 +105,7 @@ class HistoryFragment : BaseFragment() {
         val barEntriesToContact = groupedTransactions
                 .map { it.key to it.value.map { it.value }.reduce { acc, decimal -> acc + decimal } }
                 .sortedByDescending { it.second }
+                .take(6)
                 .mapIndexed { index, it -> it.first to BarEntry(index.toFloat(), it.second.toFloat()) }
 
         // set values data
@@ -137,7 +138,7 @@ class HistoryFragment : BaseFragment() {
                         override fun onResourceReady(resource: Drawable?, model: Any?, target: Target<Drawable>?, dataSource: DataSource?, isFirstResource: Boolean): Boolean {
                             resource?.let { drawable ->
                                 val bitmap = (drawable as BitmapDrawable).bitmap
-                                val scaledDrawable = BitmapDrawable(resources, Bitmap.createScaledBitmap(bitmap, Utils.convertDpToPixel(30f).toInt(), Utils.convertDpToPixel(30f).toInt(), true))
+                                val scaledDrawable = BitmapDrawable(resources, Bitmap.createScaledBitmap(bitmap, Utils.convertDpToPixel(35f).toInt(), Utils.convertDpToPixel(35f).toInt(), true))
 
                                 barEntriesToContact.firstOrNull { it.first == transition.toUserId }?.apply {
                                     dataSet.addEntry(BarEntry(this.second.x, -2f, scaledDrawable))

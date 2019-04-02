@@ -1,0 +1,93 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:background="@drawable/shape_blue_corner"
+    android:gravity="center_horizontal"
+    android:padding="16dp">
+
+    <ImageView
+        android:id="@+id/imageViewClose"
+        android:layout_width="24dp"
+        android:layout_height="24dp"
+        android:background="?selectableItemBackground"
+        android:src="@drawable/ic_close" />
+
+    <ImageView
+        android:id="@+id/imageViewProfile"
+        style="@style/ImageViewRoundBordered"
+        android:layout_width="62dp"
+        android:layout_height="62dp"
+        android:layout_centerHorizontal="true" />
+
+    <TextView
+        android:id="@+id/textViewName"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_below="@id/imageViewProfile"
+        android:layout_centerHorizontal="true"
+        android:layout_marginTop="12dp"
+        android:fontFamily="@font/semi_bold"
+        android:textColor="@color/white"
+        android:textSize="16sp"
+        tools:text="Joana Maria" />
+
+    <TextView
+        android:id="@+id/textViewPhone"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_below="@id/textViewName"
+        android:layout_centerHorizontal="true"
+        android:textColor="@color/white"
+        android:textSize="14sp"
+        tools:text="1923948392883" />
+
+    <TextView
+        android:id="@+id/textViewSendLabel"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_below="@id/textViewPhone"
+        android:layout_centerHorizontal="true"
+        android:layout_marginTop="20dp"
+        android:fontFamily="@font/light"
+        android:text="@string/value_to_send"
+        android:textColor="@color/white"
+        android:textSize="14sp" />
+
+    <EditText
+        android:id="@+id/editTextValue"
+        android:layout_width="match_parent"
+        android:layout_height="52dp"
+        android:layout_below="@id/textViewSendLabel"
+        android:layout_marginTop="12dp"
+        android:background="@drawable/shape_white_corner"
+        android:gravity="center"
+        android:inputType="number"
+        android:maxLength="13"
+        android:textColor="@color/colorAccent"
+        android:textCursorDrawable="@null"
+        android:textSize="32sp" />
+
+    <TextView
+        android:id="@+id/textViewError"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_below="@+id/editTextValue"
+        android:textColor="@color/tomato"
+        android:textSize="12sp"
+        android:visibility="invisible"
+        tools:text="Valor inválido!"
+        tools:visibility="visible" />
+
+    <com.google.android.material.button.MaterialButton
+        android:id="@+id/buttonSend"
+        style="@style/ButtonBlueSmall"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_below="@id/textViewError"
+        android:layout_marginTop="10dp"
+        android:text="@string/to_send"
+        app:cornerRadius="35dp" />
+</RelativeLayout>

@@ -17,17 +17,12 @@ class ErrorHandlingRxCallAdapterFactory : CallAdapter.Factory() {
     private val rxJavaCallAdapterFactory = RxJava2CallAdapterFactory.create()
 
     @Suppress("UNCHECKED_CAST")
-    override fun get(
-        returnType: Type?,
-        annotations: Array<out Annotation>?,
-        retrofit: Retrofit?
-    ): CallAdapter<in Any, out Any>? {
+    override fun get(returnType: Type?,
+                     annotations: Array<out Annotation>?,
+                     retrofit: Retrofit?): CallAdapter<in Any, out Any>? {
+
         return RxCallAdapterWrapper(
-            rxJavaCallAdapterFactory.get(
-                returnType!!,
-                annotations!!,
-                retrofit!!
-            ) as CallAdapter<in Any, out Any>
+            rxJavaCallAdapterFactory.get(returnType!!, annotations!!, retrofit!!) as CallAdapter<in Any, out Any>
         )
     }
 
@@ -35,7 +30,7 @@ class ErrorHandlingRxCallAdapterFactory : CallAdapter.Factory() {
         CallAdapter<Any, Single<Any>> {
 
         override fun responseType(): Type {
-            return wrapped.responseType()!!
+            return wrapped.responseType()
         }
 
         @Suppress("UNCHECKED_CAST")

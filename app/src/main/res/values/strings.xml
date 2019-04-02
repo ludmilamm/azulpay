@@ -1,3 +1,15 @@
 <resources>
     <string name="app_name">AzulPay</string>
+    <string name="ok">OK</string>
+    <string name="cancel">Cancelar</string>
+    <string name="unexpected_error">Ocorreu um erro inesperado. Tente novamente mais tarde</string>
+    <string name="no_internet_error">Não foi possível conectar à internet. Verifique sua conexão e tente novamente.</string>
+    <string name="send_money">Enviar Dinheiro</string>
+    <string name="sent_history">Histórico de envios</string>
+    <string name="value_to_send">Valor a enviar:</string>
+    <string name="to_send">Enviar</string>
+    <string name="sending">Enviando…</string>
+    <string name="transaction_success">Transação realizada com sucesso!</string>
+    <string name="empty_value">Por favor, insira um valor.</string>
+    <string name="invalid_value">Por favor, insira um valor válido.</string>
 </resources>

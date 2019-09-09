@@ -1,25 +1,25 @@
 version: 2
-  jobs:
-    build:
-      # this is the directory into which our code will be checked out
-      working_directory: ~/repo
+jobs:
+  build:
+    # this is the directory into which our code will be checked out
+    working_directory: ~/repo
 
-      # get the docker image
-      docker:
-        - image: circleci/android:api-28-alpha
+    # get the docker image
+    docker:
+      - image: circleci/android:api-28-alpha
 
-      # put here all the environment variables
-      environment:
-        JVM_OPTS: -Xmx3200m
+    # put here all the environment variables
+    environment:
+      JVM_OPTS: -Xmx3200m
 
-      steps:
-        - checkout
-        - restore_cache:
-            key: jars-{{ checksum "build.gradle" }}-{{ checksum  "app/build.gradle" }}
-        - run:
-            name: Download dependencies
-            command: ./gradlew androidDependencies
-        - save_cache:
-            paths:
-              - ~/.gradle
-            key: jars-{{ checksum "build.gradle" }}-{{ checksum  "app/build.gradle" }}
+    steps:
+      - checkout
+      - restore_cache:
+          key: jars-{{ checksum "build.gradle" }}-{{ checksum  "app/build.gradle" }}
+      - run:
+          name: Download dependencies
+          command: ./gradlew androidDependencies
+      - save_cache:
+          paths:
+            - ~/.gradle
+          key: jars-{{ checksum "build.gradle" }}-{{ checksum  "app/build.gradle" }}

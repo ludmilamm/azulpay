@@ -23,6 +23,21 @@ jobs:
           paths:
             - ~/.gradle
           key: jars-{{ checksum "build.gradle" }}-{{ checksum  "app/build.gradle" }}
+
+  bump_version:
+    # this is the directory into which our code will be checked out
+    working_directory: ~/repo
+
+    # get the docker image
+    docker:
+      - image: circleci/android:api-28-alpha
+
+    # put here all the environment variables
+    environment:
+      JVM_OPTS: -Xmx3200m
+
+    steps:
+      - checkout
       - run:
           name: Testando o script
           command: |
@@ -39,3 +54,10 @@ jobs:
             git commit -m "Bumping Project Version [ci skip]"
             cd ..
             git push https://${GITHUB_API_TOKEN}@github.com/${GITHUB_USERNAME}/${CIRCLE_PROJECT_REPONAME}.git ${CIRCLE_BRANCH}
+
+workflows:
+  version: 2
+  workflow:
+    jobs:
+      - build
+      - bump_version

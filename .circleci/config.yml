@@ -23,3 +23,9 @@ jobs:
           paths:
             - ~/.gradle
           key: jars-{{ checksum "build.gradle" }}-{{ checksum  "app/build.gradle" }}
+      - run:
+          name: Testando o script
+          command: |
+            cd scripts
+            ./testingCircleCI.sh
+            echo "o mundo é bão, Sebastião"

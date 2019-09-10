@@ -29,3 +29,13 @@ jobs:
             cd scripts
             ./testingCircleCI.sh
             echo "o mundo é bão, Sebastião"
+            printf "\n"
+            echo "-- Pushing To Github --"
+            printf "\n"
+            git config credential.helper 'cache --timeout=120'
+            git config user.email ${GITHUB_EMAIL}
+            git config user.name ${GITHUB_USERNAME}
+            git add ../app/build.gradle
+            git commit -m "Bumping Project Version [ci skip]"
+            cd ..
+            git push https://${GITHUB_API_TOKEN}@github.com/${GITHUB_USERNAME}/${CIRCLE_PROJECT_REPONAME}.git ${CIRCLE_BRANCH}
